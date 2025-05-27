@@ -118,10 +118,13 @@ video {
   color: #333;
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: 0
-  ;
+  margin-bottom: 0;
 }
 
+.audio {
+  margin-left: 35%;
+  margin-right: auto;
+}
 
 /* SECCION DESTINOS */
 .destinations .box-container{
@@ -492,12 +495,11 @@ btn btn-outline-primary btn-square {
   text-align: center;
 }
 
-/* STYLOS DE  */
 
 /* PAGINA DE CONTACTOS*/
 
 .contact {
-  margin-top: 3rem;
+  margin-top: 5rem;
 }
 
 .contact .contact-row{
@@ -511,6 +513,7 @@ btn btn-outline-primary btn-square {
 .contact .contact-row .contact-image{
   flex:1 1 10rem;
   max-width: 30rem;
+  margin-right: 3rem;
 }
 
 .contact .contact-row .contact-image img{
@@ -519,7 +522,7 @@ btn btn-outline-primary btn-square {
 }
 
 .contact .contact-row form{
-  flex:1 1 10rem;
+  flex:1 1 5rem;
   padding: 1rem;
   box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
   border-radius: .5rem;
