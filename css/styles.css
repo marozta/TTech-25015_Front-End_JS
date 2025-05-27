@@ -38,7 +38,13 @@ html {
   border: 2px solid var(--orange);
   background: rgba(255, 165, 0, .2);
   color: var(--orange);
- 
+
+}
+
+a[href^="mailto"], [href^="https"] {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 /* SECCIONES */
@@ -83,14 +89,6 @@ section {
   color: white;
 }
 
-#book {
-  border: 1px solid white;
-  border-radius: 10px;
-}
-
-#book:hover {
-  border: 1px solid var(--orange);
-}
 
 /* VIDEO PRESENTACION */
 
@@ -559,42 +557,59 @@ btn btn-outline-primary btn-square {
   box-shadow: 0 1rem 2rem rgba(0,0,0,.3);
 }
 
+
 /* PAGINA DE BOOKING */
 
 .book {
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
-
 
 .book-row {
     display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .book-image {
-    max-width: 30%;
-    object-fit: cover;
-    padding: 1rem;
-    margin: 2rem 1rem 2rem 4rem;
+    width: 30%;
+    margin: 0 3rem;
 }
 
 .book-image img {
-    object-fit: cover;
-    padding: 1rem;
-    width: 100%;
-    height: auto;
-    }
-
-.book-form {
- 
-     min-width: 40%;
-     margin-left: 15%;
-     padding-left: 2rem;
+  object-fit:cover;
+  width: auto;
+  height: 400px;
 }
 
-.book .book-row form .inputBox .inputselect {
-    max-width: 50%;
+.book-form {
+    max-width: 60%;
+    padding: 2rem;;
+}
+
+.passengers, .dates {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+}
+
+.passengers h3, .dates h3, .comments h3 {
+  margin-right: 2rem;
+}
+
+.passengers input, .dates input {
+  width: 300px;
+  margin-right: 2rem;
+}
+
+.book .book-row .book-form h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.book .book-row .book-form .inputselect {
+    max-width: 40%;
     padding: .5rem;
     border: .5rem solid rgba(0,0,0,.1);
     font-size: 1rem;
@@ -602,22 +617,18 @@ btn btn-outline-primary btn-square {
     text-transform: none;
 }
 
-.book .book-row form .inputBox h3 {
- font-size: 1rem;
- padding: .5rem 0;
- color: #666;
+.book .book-row .book-form .passangers input, .book .book-row .book-form .dates input {
+    max-width: 50%;
+    padding: .5rem;
+    border: .5rem solid rgba(0,0,0,.1);
+    font-size: 1rem;
+    color: #333;
+    text-transform: none;
+    font-size: 1rem;
+    color: #666;
 }
 
-.book .book-row form .inputBox input {
- padding: .5rem;
- border: .5rem solid rgba(0,0,0,.1);
- font-size: 1rem;
- color: #333;
- text-transform: none;
-}
-
-.book .book-row form .inputBox input, .book .book-row form textarea {
-  width: 49%;
+.book .book-row form .imputselect, .book-row .passangers input{
   margin: 1rem 0;
   padding: 1rem;
   font-size: 1rem;
@@ -626,9 +637,16 @@ btn btn-outline-primary btn-square {
   text-transform: none;
 }
 
+.book .book-row h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color:black;
+  margin-top: 1rem;;
+}
+
 .book .book-row form textarea{
   height: 5rem;
-  width: 80%;
+  width: 50%;
 }
 
 .book .book-row .book-form {
