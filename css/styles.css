@@ -284,6 +284,7 @@ video {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
+    gap: 2%;
     overflow: hidden;
 }
 
