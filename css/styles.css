@@ -43,7 +43,8 @@ html {
 
 /* SECCIONES */
 section {
- padding: 2% 0%;
+  width: 90%;
+  margin: auto;
 }
 
 /* TITULOS */
@@ -54,7 +55,7 @@ section {
 }
 
 .heading span {
- font-size: rem;
+ font-size: 2.5rem;
  background: rgba(255, 165, 0, .2);
  color: var(--orange);
  border-radius: .5rem;
@@ -101,7 +102,7 @@ video {
   overflow: hidden;
   object-fit:cover ;
   margin-left: 5%;
-  margin-top: 8%;
+  margin-top: 10%;
   margin-bottom: 0;
 }
 
@@ -126,7 +127,7 @@ video {
 .destinations .box-container{
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .destinations .box-container .box{
@@ -137,7 +138,7 @@ video {
 }
 
 .destinations .box-container .box img{
-  height: 30rem;
+  height: 15rem;
   width: 100%;
   object-fit: cover;
 }
@@ -210,7 +211,8 @@ video {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 40%;
+ 
 }
 
 .packages .box-container .box-pack .content {
@@ -284,7 +286,22 @@ video {
     grid-column-gap: 2%;
     grid-row-gap: 2%;
     overflow: hidden;
-  
+}
+
+.left-title {
+    font-size: 2.5rem;
+    background: rgba(255, 165, 0, .2);
+    color: var(--orange);
+    border-radius: .5rem;
+    letter-spacing: 15px;
+}
+
+.right-title {
+    font-size: 2.5rem;
+    background: rgba(255, 165, 0, .2);
+    color: var(--orange);
+    border-radius: .5rem;
+    letter-spacing: 25px;
 }
 
 .item1 {
@@ -297,18 +314,39 @@ video {
     grid-row: 2 / 5;
 }
 
-.grid-container .item2 .stars i {
+.reviewsandgallery .grid-container .item2 .box {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  padding: 10%;
+  border: 1px solid #bfc9ca;
+  border-radius: 1rem;
+}
+
+.reviewsandgallery .grid-container .item2 .box img{
+  border-radius: 50%;
+
+}
+
+
+.reviewsandgallery .grid-container .item2.box h1 {
   font-size: .1rem;
+  margin-top: 10%;
+
+}
+
+.reviewsandgallery .grid-container .item2 .stars i {
+  font-size: 1rem;
   color: var(--orange);
 }
 
-.grid-container .item2 .box {
+.reviewsandgallery .grid-container .item2 .box {
   box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
 }
 
-.grid-container .item2 .box:hover{
+.reviewsandgallery .grid-container .item2 .box:hover{
   box-shadow: 0 1rem 2rem rgba(0,0,0,.3); 
-}*/
+}
 
 .item3 {
     grid-column: 2 / 5;
@@ -374,7 +412,6 @@ video {
  align-items: center;
  padding-top: 3%;
 }
-
 
 .grid-container .card .pic {
   width: 90%;
