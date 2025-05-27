@@ -284,8 +284,6 @@ video {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
-    grid-column-gap: 2%;
-    grid-row-gap: 2%;
     overflow: hidden;
 }
 
@@ -655,5 +653,105 @@ btn btn-outline-primary btn-square {
 
 .book .book-row .book-form:hover{
   box-shadow: 0 1rem 2rem rgba(0,0,0,.3);
+}
+
+/*  SECTOR RESPONSIVE */
+  /* SECCION RESEÑAS  Y GALERIA */
+
+@media (max-width: 767px) {
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.item1 {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+  place-content: center;
+  text-align: center;
+}
+
+.item2 {
+  grid-column: 1 / 4;
+  grid-row: 2 / 5;
+  place-content: center;
+  text-align: center;
+}
+
+.item3 {
+  margin-top: 3rem;  
+  grid-column: 1 / 4;
+  grid-row: 5 / 6;
+  place-content: center;
+  text-align: center;
+}
+
+.item4 {
+  grid-column: 1 / 2;
+  grid-row: 6 / 7;
+  place-content: center;
+  text-align: center;
+}
+
+.item5 {
+  grid-column: 2 / 3;
+  grid-row: 6 / 7;
+  place-content: center;
+  text-align: center;
+}
+
+.item6 {
+  grid-column: 3 / 4;
+  grid-row: 6 / 7;
+  place-content: center;
+  text-align: center;
+}
+  .item7 {
+  place-content: center;
+  text-align: center;
+  grid-column: 1 / 2;
+  grid-row: 7 / 8;
+}
+
+.item8 {
+  grid-column: 2 / 3;
+  grid-row: 7 / 8;
+  place-content: center;
+  text-align: center;
+}
+
+.item9 {   
+  grid-column: 3 / 4;
+  grid-row: 7 / 8;
+  place-content: center;
+  text-align: center;
+}
+
+.item10 { 
+  grid-column: 1 / 2;
+  grid-row: 8 / 9;
+  place-content: center;
+  text-align: center;
+}
+
+.item11 {
+  grid-column: 2 / 3;
+  grid-row: 8 / 9;
+  place-content: center;
+  text-align: center;
+}
+
+.item12 {
+  grid-column: 3 / 4;
+  grid-row: 8 / 9;
+  place-content: center;
+  text-align: center;
+}
+      
 }
 
