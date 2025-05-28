@@ -55,7 +55,7 @@ html {
 }
 
 /* GRILLA DE RESEÑAS */
-.grid-container {
+.reviews .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;;
     grid-template-rows: 1fr 1fr 1fr;
@@ -67,7 +67,7 @@ html {
     column-gap:2%;
 }
 
-.grid-container .box {
+.reviews .grid-container .box {
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
@@ -76,7 +76,7 @@ html {
     border-radius: 1rem;
 }
 
-.grid-container .box {
+.revieww .grid-container .box {
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
@@ -85,89 +85,89 @@ html {
     border-radius: 1rem;
 } 
 
-.grid-container .box img{
+.reviews .grid-container .box img{
   border-radius: 50%;
 }
 
-.grid-container .box h3{
+.reviews .grid-container .box h3{
   font-size: 1.2rem;
   margin-top: 10%;
 }
 
-.grid-container .stars i {
+.reviews .grid-container .stars i {
   font-size: 1rem;
   color: var(--orange);
 }
 
-.grid-container .box {
+.reviews .grid-container .box {
   box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
 }
 
-.grid-container .box:hover{
+.reviews .grid-container .box:hover{
   box-shadow: 0 1rem 2rem rgba(0,0,0,.3); 
 }
 
-.item1 {
+.reviews .item1 {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
 
-.item2 {
+.reviews .item2 {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
 
-.item3 {
+.reviews .item3 {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
 }
 
-.item4 {
+.reviews .item4 {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
 }
 
-.item5 {
+.reviews .item5 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 }
 
-.item6 {
+.reviews .item6 {
     grid-column: 3 / 4;
     grid-row: 2 / 3;
 }
 
-.item7 {
+.reviews .item7 {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
 }
 
-.item8 {
+.reviews .item8 {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 }
 
-.item9 {
+.reviews .item9 {
     grid-column: 3 / 4;
     grid-row: 3 / 4;
 }
 
-.item10 {
+.reviews .item10 {
     grid-column: 1 / 2;
     grid-row: 4 / 5;
 }
 
-.item11 {
+.reviews .item11 {
     grid-column: 2 / 3;
     grid-row: 4 / 5;
 }
 
-.item12 {
+.reviews .item12 {
     grid-column:3 / 4;
     grid-row: 4 / 5;
 }
 
-.title {
+.reviews .title {
   display: flex;
   justify-content: center;
 }
