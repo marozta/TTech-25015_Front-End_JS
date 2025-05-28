@@ -203,7 +203,7 @@ video {
 
 /* SECCION PAQUETES */
 .packages {
-  max-width: 70%;
+  max-width: 100%;
 }
 
 .packages .box-container{
@@ -228,7 +228,7 @@ video {
 }
 
 .packages .box-container .box-pack .content {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .packages .box-container .box-pack .content h3 {
@@ -250,7 +250,7 @@ video {
 
 /* SECCION SERVICIOS */
 .services {
-  max-width: 75%;
+  max-width: 90%;
 }
 
 .services .box-container{
