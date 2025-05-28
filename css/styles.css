@@ -122,13 +122,13 @@ video {
 }
 
 .audio {
-  margin-left: 45%;
+  margin-left: 40%;
   margin-right: auto;
 }
 
 /* SECCION DESTINOS */
 .destinations {
-  max-width: 75%;
+  max-width: 90%;
 }
 
 
@@ -310,7 +310,7 @@ video {
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
-    padding: 10%;
+    padding: 5%;
     border: 1px solid #bfc9ca;
     border-radius: 1rem;
     height: 60rem;
@@ -321,8 +321,14 @@ video {
 }
 
 .reviews .grid-container .box h3{
-  font-size: 1.2rem;
-  margin-top: 10%;
+  font-size: 2rem;
+
+}
+
+.reviews .grid-container .box p{
+  font-size: 1rem;
+  margin-top: 0;
+
 }
 
 .reviews .grid-container .stars i {
