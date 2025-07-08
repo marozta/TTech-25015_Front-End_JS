@@ -21,12 +21,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
                 rel="stylesheet">
 
+        <!-- WEATHER ICONS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+        
         <!-- CSS -->        
         <link rel="stylesheet" href="./css/styles.css" > 
         <link rel="stylesheet" href="./css/carrito_styles.css">       
 
         <!-- TITULO DE LA PAGINA -->
         <title>Talento Tech | Front-End JS</title>
+       
     </head>
     <body>
         <header>
@@ -539,91 +543,101 @@
                     <span>o</span>
                     <span>o</span>
                     <span>k</span>
-                    <span>.</span>
+                    <span>-</span>
                     <span>N</span>
                     <span>o</span>
                     <span>w</span>
                 </h1>
                 <div class="form">
-                <form id="form-viaje" class="grid-container">
-                    <label class="item1">
-                        Destino:
-                        <select id="destino">
-                            <option value="">Elije tu destino:</option>
-                            <option value="bariloche" data-precio="89900">Bariloche</option>
-                            <option value="calafate" data-precio="99900">El Calafate</option>
-                            <option value="cataratas" data-precio="99900">Cataratas del Iguazú</option>
-                            <option value="cordoba" data-precio="59900">Córdoba</option>
-                            <option value="mardelplata" data-precio="49900">Mar del Plata</option>
-                            <option value="mendoza" data-precio="59900">Mendoza</option>
-                            <option value="madryn" data-precio="109900">Puerto Madryn</option>
-                            <option value="salta" data-precio="79900">Salta y Jujuy</option>
-                            <option value="usuahia" data-precio="129900">Usuahia</option>
-                        </select>
-                    </label>
-
-                    <label class="item2">
-                        Nivel de hotel:
-                        <select id="nivel">
-                            <option value="">Elije tu nivel:</option>
-                            <option value="1">Bronce</option>
-                            <option value="2">Plata</option>
-                            <option value="3">Oro</option>
-                            <option value="4">Platino</option>
-                        </select>
-                    </label>
-
-                    <label class="item3">
-                        Fecha de ida:
-                        <input type="date" id="fecha-ida" required>
-                    </label>
-
-                    <label class="item4">
-                        Fecha de vuelta:
-                        <input type="date" id="fecha-vuelta" required>
-                    </label>
-
-                    <label class="item5">
-                        Cantidad de total de pasajeros:
-                        <input type="number" id="pasajeros" min="1" value="1" required>
-                    </label>
-
-                    <label class="item6">
-                        ¿Hay pasajeros menores de 14 años, cuántos?
-                        <input type="number" id="menores" min="0" value="0">
-                    </label>
-        
-                    <div class="item7">
-                        <button type="submit">Agregar al carrito</button>
-                        <button type="reset">Reestablecer</button>
-                    </div>   
-                </form>
+                    <form id="form-viaje" class="grid-container">
+                        <label for="" class="item1">
+                            <input type="text" name="nombre" id="nombre"
+                                    placeholder="Ingrese su Nombre">
+                        </label>
+                        <label class="item2">
+                            <input type="email" name="email" id="email"
+                                placeholder="Ingrese su email">    
+                        </label>
+                        <label for="destino" class="item3">
+                            Destino:
+                            <select id="destino" name="destino">
+                                <option value="">Elije tu destino:</option>
+                                <option value="bariloche" data-precio="89900">Bariloche</option>
+                                <option value="calafate" data-precio="99900">El Calafate</option>
+                                <option value="cataratas" data-precio="99900">Cataratas del Iguazú</option>
+                                <option value="cordoba" data-precio="59900">Córdoba</option>
+                                <option value="mardelplata" data-precio="49900">Mar del Plata</option>
+                                <option value="mendoza" data-precio="59900">Mendoza</option>
+                                <option value="madryn" data-precio="109900">Puerto Madryn</option>
+                                <option value="salta" data-precio="79900">Salta y Jujuy</option>
+                                <option value="usuahia" data-precio="129900">Usuahia</option>
+                            </select>
+                        </label>
+                        <label class="item4">
+                            Nivel de hotel:
+                            <select id="nivel">
+                                <option value="">Elije tu nivel:</option>
+                                <option value="1">Bronce</option>
+                                <option value="2">Plata</option>
+                                <option value="3">Oro</option>
+                                <option value="4">Platino</option>
+                            </select>
+                        </label>
+                        <label for="fecha-ida" class="item5">
+                            Fecha de ida:
+                            <input type="date" id="fecha-ida" required>
+                        </label>
+                        <label for="fecha-regreso"  class="item6">
+                            Fecha de regreso:
+                            <input type="date" id="fecha-regreso" required>
+                        </label>
+                        <label class="item7">
+                            Cantidad de total de pasajeros:
+                            <input type="number" id="pasajeros" min="1" value="1" required>
+                        </label>
+                        <label class="item8">
+                            ¿Cuantos menores de 14 años?
+                            <input type="number" id="menores" min="0" value="0">
+                        </label>
+                        <div class="item9">
+                            <button type="submit">Agregar al carrito</button>
+                            <button type="reset">Reestablecer</button>
+                        </div>   
+                    </form>
                 </div>
-                    <div id="carrito">
-                        <h2>Carrito de Compras</h2>
-                        <div class="table-responsive">
-                            <table id="tabla-carrito" style="display: none; width: 100%; border-collapse: collapse;">
-                                <thead>
-                                    <tr>
-                                    <th>Destino</th>
-                                    <th>Nivel</th>
-                                    <th>Días</th>
-                                    <th>Tipo pasajero</th>
-                                    <th>Precio diario / pasajero</th>
-                                    <th>Subtotal</th>
-                                    <th>Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Filas generadas con JS -->
-                                </tbody>
-                            </table>
-                        <div id="total" style="font-weight: bold; margin-top: 10px;"></div>
-                    </div>
-                    <button class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
-                    <button class="confirmar" onclick="confirmarCompra()">Confirmar compra</button>
-                    <div id="resumen"></div>
-                </form>       
+                <h2>Carrito de Compras</h2>
+                <div class="table-responsive">
+                    <table id="tabla-carrito" style="display: none; width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Destino</th>
+                                <th>Nivel</th>
+                                <th>Días</th>
+                                <th>Tipo pasajero</th>
+                                <th>Precio diario / pasajero</th>
+                                <th>Subtotal</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filas generadas con JS -->
+                        </tbody>
+                    </table>
+                    <div id="total" style="font-weight: bold; margin-top: 10px;"></div>
+                </div>
+                <button class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
+                <button class="confirmar" onclick="confirmarCompra()">Confirmar compra</button>
+                <div class="js">
+                    <!-- Resumen de la compra del viaje -->
+                    <div id="resumen"><!-- Filas generadas con JS --></div>
+                    <!-- Fin resumen de la compra  -->
+                    <!-- API pronostico del clima -->
+                    <div class="api">
+                        <h1 id="titulo-clima">Pronostico del clima para el viaje</h1>
+                        <div class="weather-container" id="clima"></div> 
+                    </div> 
+                </div>            
+                    <!-- Fin API -->
             </section>
         </main>
             <!-- FOOTER -->
@@ -714,7 +728,7 @@
 
         </footer>
             <!-- SCRIPT JS -->
-        <script src="./js/carrito.js"></script>        
+        <script src="/js/carrito.js"></script> 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
