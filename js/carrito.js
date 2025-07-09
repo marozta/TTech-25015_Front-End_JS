@@ -1,3 +1,4 @@
+// objeto con los precios de los destinos (reemplazan a los del HTML si no estuvieran)
 const preciosDestino = {
   bariloche: 89900,
   calafate: 99900,
@@ -10,6 +11,7 @@ const preciosDestino = {
   usuahia: 129900
 };
 
+// objeto con los niveles de los alojamientos
 const nombresNivel = {
   1: 'Bronce',
   2: 'Plata',
@@ -17,6 +19,7 @@ const nombresNivel = {
   4: 'Platino'
 };
 
+// objeto que indican el diferencial de precio de cada nivel de alojamiento
 const multiplicadorNivel = {
   1: 1.0,
   2: 1.5,
@@ -24,6 +27,8 @@ const multiplicadorNivel = {
   4: 4.0
 };
 
+// objeto que indica la latitud y la longitud de cada destino
+// (Necesario para la API de pronostico del clima)
 const destinos = {
   "Bariloche": { lat: -41.1335, lon: -71.3103 },
   "El Calafate": { lat: -50.3378, lon: -72.2648 },
@@ -38,6 +43,7 @@ const destinos = {
 
 let carrito = [];
 
+// muetra el carrito almacenado en localStorage
 window.addEventListener('DOMContentLoaded', () => {
   const almacenado = localStorage.getItem('carritoViajes');
   if (almacenado) {
@@ -46,6 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// toma el destino de las opciones del formulario "BOOK"
 document.getElementById('form-viaje').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -54,31 +61,37 @@ document.getElementById('form-viaje').addEventListener('submit', function (e) {
   const destino = selectedOption.value;
   const destinoNombre = selectedOption.textContent;
 
+  // toma el precio base del destino del HTML o del objeto "preciosDestino" en su defecto
   let precioBase = selectedOption.getAttribute('data-precio') || preciosDestino[destino];
   precioBase = parseFloat(precioBase);
 
+  // toma el nivel, fecha inicial y final, cantidad de pasajeros totales y menores de las opciones del formulario "BOOK"
   const nivel = document.getElementById('nivel').value;
   const fechaIda = new Date(document.getElementById('fecha-ida').value);
   const fechaVuelta = new Date(document.getElementById('fecha-regreso').value);
   const pasajeros = parseInt(document.getElementById('pasajeros').value);
   const menores = parseInt(document.getElementById('menores').value);
 
+  // calcula la diferencia en dias entre la fecha de llegada y de regreso
   const dias = Math.ceil((fechaVuelta - fechaIda) / (1000 * 60 * 60 * 24));
 
+  // verifica que la fecha de regreso sea posterior a la de llegada
   if (dias <= 0) {
     alert("La fecha de regreso debe ser posterior a la de ida.");
     return;
   }
-
+  // verifica que la cantidad de pasajeros menores sea menor a la de pasajeros totales
   if (menores > pasajeros) {
     alert("La cantidad de menores no puede ser mayor que la cantidad total de pasajeros.");
     return;
   }
-
+  // calcula el precio del viaje por pasajero en funcion del precio base, el nivel del hotel y la cantidad de dias
+  // a los pasajeros menores les aplica un descuento del 50%
   const multiplicador = multiplicadorNivel[nivel];
   const precioPorAdulto = precioBase * multiplicador * dias;
   const precioTotal = (pasajeros - menores) * precioPorAdulto + menores * (precioPorAdulto * 0.5);
 
+  // se construye un objeto "item" con todos los datos del carrito de compras
   const item = {
     destino: destinoNombre,
     nivel: parseInt(nivel),
@@ -90,18 +103,21 @@ document.getElementById('form-viaje').addEventListener('submit', function (e) {
     menores,
     precio: precioTotal
   };
-
+  // se coloca el objeto "item" en el carrito y se llama a funciones de carrito
   carrito.push(item);
   guardarCarrito();
   mostrarCarrito();
 });
 
+  //  funcion que muestra el carrito en el HTML
 function mostrarCarrito() {
+  // se obtiene la tabla "tabla-carrito" del HTML y el tbody de la tabla
   const tabla = document.getElementById('tabla-carrito');
   const tbody = tabla.querySelector('tbody');
   tbody.innerHTML = '';
   let total = 0;
 
+  // se verifica que el carrito tenga un objeto cargado
   if (carrito.length === 0) {
     tabla.style.display = 'none';
     document.getElementById('total').textContent = '';
@@ -109,7 +125,7 @@ function mostrarCarrito() {
   }
 
   tabla.style.display = 'table';
-
+  // se cargan los elementos del objeto "item" para mostrar en el carrito 
   carrito.forEach((item, index) => {
     const cantidadAdultos = item.pasajeros - item.menores;
     const dias = item.dias;
@@ -120,6 +136,7 @@ function mostrarCarrito() {
     const subtotalMenores = item.menores * precioPorMenorPorDia * dias;
     const hayMenores = item.menores > 0;
 
+    // se crea la tabla que configura el carrito
     const filaAdultos = document.createElement('tr');
     filaAdultos.innerHTML = `
       <td ${hayMenores ? 'rowspan="2"' : ''}>${item.destino}</td>
@@ -132,8 +149,11 @@ function mostrarCarrito() {
         <button class="eliminar" onclick="eliminarItem(${index})">Eliminar</button>
       </td>
     `;
+
+    // se agrega la tabla con el carrito al HTML
     tbody.appendChild(filaAdultos);
 
+    // se verifica que haya menores para mostrarlos en una linea aparte en el carrito
     if (hayMenores) {
       const filaMenores = document.createElement('tr');
       filaMenores.innerHTML = `
@@ -143,17 +163,20 @@ function mostrarCarrito() {
       `;
       tbody.appendChild(filaMenores);
     }
-
+    // muestra una linea de separacion al final del carrito
     const filaSeparadora = document.createElement('tr');
     filaSeparadora.innerHTML = `<td colspan="7" style="background-color: #ddd; height: 10px;"></td>`;
     tbody.appendChild(filaSeparadora);
 
+    // se obtiene el precio total sumando el precio de los pasajeros adultos y de los menores
     total += subtotalAdultos + subtotalMenores;
   });
 
+  // se agrega el precio total al elemento "total" en el HTML
   document.getElementById('total').textContent = `Total: $${total.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 }
 
+// funcion que permite eliminar un viaje del carrito
 function eliminarItem(index) {
   if (confirm("¿Seguro que quieres eliminar este ítem del carrito?")) {
     carrito.splice(index, 1);
@@ -162,6 +185,7 @@ function eliminarItem(index) {
   }
 }
 
+// funcion que permite vaciar los campos del carrito
 function vaciarCarrito() {
   if (confirm("¿Seguro que deseas vaciar todo el carrito?")) {
     carrito = [];
@@ -173,17 +197,20 @@ function vaciarCarrito() {
   }
 }
 
-
+// funcion que permite guardar el carrito en el localStorage
 function guardarCarrito() {
   localStorage.setItem('carritoViajes', JSON.stringify(carrito));
 }
 
+// funcion que permite confirmar la compra mostrando en pantalla un resumen de la misma
 async function confirmarCompra() {
+  // verifica que el carrito no este vacio
   if (carrito.length === 0) {
     alert("El carrito está vacío.");
     return;
   }
 
+  // toma los datos de los campos del carrito
   let total = 0;
   let detalleViajes = '';
   const primerDestino = carrito[0];
@@ -191,10 +218,12 @@ async function confirmarCompra() {
   const fechaIda = new Date(primerDestino.fechaIda);
   const fechaRegreso = new Date(primerDestino.fechaVuelta);
 
+  // agrega cada campo del carrito al resumen de compra
   carrito.forEach((item) => {
     total += item.precio;
     const adultos = item.pasajeros - item.menores;
 
+    // string template con los datos a mostrar
     detalleViajes += `
       <div style="margin-bottom: 1em;">
         <strong>🧭 Destino:</strong> ${item.destino}<br>
@@ -208,18 +237,21 @@ async function confirmarCompra() {
     `;
   });
 
+// string template con los datos del resumen
   const resumenHtml = `
     <h3>Resumen de la compra:</h3>
     ${detalleViajes}
-    <p><strong>Total a pagar:</strong> $${total.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</p>
+    
   `;
 
+  // muestra el resumen de la compra en pantalla
   document.getElementById('resumen').innerHTML = resumenHtml;
 
-  // Llamar obtenerClima con destino y fechas para mostrar pronóstico
+  // llama a la funcion obtenerClima con destino y fechas para mostrar pronóstico del clima
   obtenerClima(destinos[destinoNombre].lat, destinos[destinoNombre].lon, fechaIda, fechaRegreso, destinoNombre);
 }
 
+// funcion que asigna iconos a los datos de la API del clima
 function codigoAIcono(codigo) {
   if (codigo === undefined) return '❓';
   if ([0].includes(codigo)) return '☀️';
@@ -232,7 +264,7 @@ function codigoAIcono(codigo) {
   if ([95, 96, 99].includes(codigo)) return '⛈️';
   return '❓';
 }
-
+// funcion que muestra convierte en texto los datos de la API del clima
 function descripcionClima(codigo) {
   if (codigo === undefined) return 'Desconocido';
   const descripciones = {
@@ -268,43 +300,47 @@ function descripcionClima(codigo) {
   return descripciones[codigo] || 'Desconocido';
 }
 
-
-// Función para obtener el clima desde Open Meteo
-
+// función para obtener el clima desde la API Open Meteo
+// se pasan latitud, longitud del destino, las fechas de llegada y regreso del viajey el nombre del destino
 async function obtenerClima(lat, lon, originalFechaIda, originalFechaRegreso, destinoNombre) {
   const container = document.getElementById('clima');
   document.getElementById('titulo-clima').innerText = `Pronóstico del clima para su viaje a ${destinoNombre}`;
-  
 
+  // se cargan los datos obteniddos en el HTML
   container.innerHTML = '<p>Cargando clima...</p>';
 
+  // se determina la fecha actual 
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
   const fechaMax = new Date(hoy);
+
+  // se establece la fecha máxima del pronóstico. La extensión máxima del pronóstico de la API es de 16 dias
   fechaMax.setDate(fechaMax.getDate() + 15); // Hoy + 15 = 16 días total
 
+  // se toman las fecha de ida y de regreso del viaje
   let fechaIda = new Date(originalFechaIda);
   let fechaRegreso = new Date(originalFechaRegreso);
 
   let mensajeExtra = "";
 
-  // Caso 3: todo el viaje está fuera del rango
+  // Caso 3: todo el viaje está fuera del rango del pronóstico, entonces advierte la situación 
   if (fechaIda > fechaMax) {
     mensajeExtra = `<p><strong>ℹ️ No se puede mostrar el pronóstico del viaje porque excede el rango posible.</strong><br>Mostramos el clima actual y de la próxima semana como referencia.</p>`;
     fechaIda = new Date(hoy);
     fechaRegreso = new Date(hoy);
     fechaRegreso.setDate(fechaRegreso.getDate() + 7);
   }
-  // Caso 2: parte del viaje excede el rango
+  // Caso 2: parte del viaje excede el rango de pronóstico, entonces advierte que el viaje excede la extensión del pronóstico 
   else if (fechaRegreso > fechaMax) {
     mensajeExtra = `<p><strong>ℹ️ El pronóstico solo está disponible hasta el ${fechaMax.toLocaleDateString()}.</strong><br>Se mostrarán los días posibles dentro del rango.</p>`;
     fechaRegreso = new Date(fechaMax);
   }
-
-  // Armar fechas para la URL
+  // se busca el pronóstico de los dias del viaje
+  // se armam fechas para la URL de la API
   const start = hoy.toISOString().split('T')[0];
   const end = fechaMax.toISOString().split('T')[0];
 
+  // se realiza la llamada a la url de la API con los datos necesarios: latitud, longitud del destino y fecha de inicia y finalización del viaje
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&start_date=${start}&end_date=${end}`;
     const response = await fetch(url);
@@ -328,15 +364,16 @@ async function obtenerClima(lat, lon, originalFechaIda, originalFechaRegreso, de
       container.innerHTML = '<p>No hay datos de clima disponibles para las fechas seleccionadas.</p>';
       return;
     }
-
+    // se muestran los datos de cada día del pronóstico
     let html = mensajeExtra;
     html += `<h4>Pronóstico del clima del ${fechaIda.toLocaleDateString()} al ${fechaRegreso.toLocaleDateString()}</h4>`;
     html += `<div style="display: flex; flex-wrap: wrap; gap: 1em; justify-content: flex-start;">`;
 
+    // se colocan los iconos y el formato de salida en los datos del pronóstico
     for (const dia of pronostico) {
-      const icono = codigoAIcono(dia.codigo); // Esta función ya debe estar definida
+      const icono = codigoAIcono(dia.codigo); 
       html += `
-        <div style="border: 1px solid #ccc; padding: 0.8em; border-radius: 8px; width: 140px; text-align: center; background: #f9f9f9;">
+        <div style="border: 1px solid #ccc; padding: 0.3em; border-radius: 8px; width: 160px; text-align: center; background: #f9f9f9;">
           <strong>${dia.fecha.toLocaleDateString()}</strong><br>
           <span style="font-size: 1.8em;">${icono}</span><br>
           <span style="color: #555;">${descripcionClima(dia.codigo)}</span><br>
@@ -345,7 +382,7 @@ async function obtenerClima(lat, lon, originalFechaIda, originalFechaRegreso, de
         </div>
       `;
     }
-
+    // se colocan la respuesta en el HTML para mostrar por pantalla
     html += `</div>`;
     container.innerHTML = html;
 

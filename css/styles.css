@@ -1,7 +1,13 @@
 /* -------------------------------
    Estilos base: ~375px (mobile)
 ---------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
 /* GENERAL */
 
@@ -33,11 +39,12 @@ html {
  padding: .5rem;
  border: .2rem solid var(--orange);
  font-size: 1rem;
+ font-weight: 800;
  width: 8rem;
  align-self: center;
 }
 
-.btn:hover {
+.btn:hover, .btn-book:hover, .btn-cart:hover {
   border: 2px solid var(--orange);
   background: rgba(255, 165, 0, .2);
   color: var(--orange);
@@ -69,6 +76,27 @@ button {
   border-radius: 4px;
   font-size: 1rem;
 }
+
+.presentation-video .main-title {
+  font-size: 4rem;
+  color: var(--orange);
+  font-weight: 800;
+}
+
+.presentation-video .main-text {
+  font-size: 2rem;
+}
+
+.section-title {
+  font-family: "Bungee";
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  color: var(--orange);
+  text-align: center;
+  margin-top: 3%;
+}
+
 
 /* HEADER - BARRA NAVEGACION SUPERIOR */
 
@@ -102,7 +130,7 @@ video {
   overflow: hidden;
   object-fit:cover ;
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: 0;
 }
 
@@ -307,11 +335,13 @@ video {
   margin-bottom: 1rem;
 }
 
+.reviews .grid-container .card:hover {
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.3);
+}
 
 .booking .grid-container {
     display: grid;
     text-align: start;
-  
 }
 
 .booking .grid-container .item1 {
@@ -372,6 +402,19 @@ video {
   width: 100%;
 }
 
+.btn-book, .btn-cart {
+display: inline-block;
+margin-top: 1rem;
+background: var(--orange);
+color: #fff;
+padding: .5rem;
+border: .2rem solid var(--orange);
+font-size: 1rem;
+font-weight: 800;
+width: auto;
+align-self: center;
+}
+
 #tabla-carrito {
   width: 100%;
   border-collapse: collapse;
@@ -380,15 +423,17 @@ video {
 
 .js {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .resumen, .api{
-  width: 50%;
+  width: 100%;
 }
 
 
 /* FOOTER - BARRA NAVEGACION INFERIOR */
-
 
 /* -------------------------------
    Media queries: Tablet (≥576px)
