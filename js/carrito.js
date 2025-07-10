@@ -256,7 +256,7 @@ async function confirmarCompra() {
 
 // string template con los datos del resumen
   const resumenHtml = `
-    <h3 style="color: green; font-weight: bold">Resumen de la compra:</h3>
+    <h3 style="color: green; font-weight: bold; align:center">Resumen de la compra:</h3>
     ${detalleViajes}
   `;
 

@@ -544,13 +544,13 @@
 
                 <h2 class="section-title">Book</h2>
 
-                <div class="form" class="form-wrapper">
+                <div class="form">
 
                     <div class="form-header">
                         <i class="fa-solid fa-calendar-check"></i> Realiza tu reserva
                     </div>    
                     
-                    <form id="form-viaje" class="grid-container">
+                    <form id="form-viaje" >
 
                         <div class="form-group">
                             <label for="name">Por favor ingresa tu nombre</label>
@@ -624,9 +624,10 @@
                             <input type="date" name="fecha-regreso" id="fecha-regreso" required>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn-book">Agregar al carrito</button>
-                        <button type="reset" class="btn-book">Reestablecer</button>
+                            <div class="buttons">
+                                <button type="submit" class="btn-book-cart">Agregar al carrito</button>
+                                <button type="reset" class="btn-book-reset">Reestablecer</button>
+                            </div>   
                     </form>
                 
                 </div>
@@ -651,12 +652,16 @@
                     </table>
                     <div id="total" style="font-size: 2rem; font-weight: bold; margin-top: 10px;"></div>
                 </div>
-                <button class="btn-cart" class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
-                <button class="btn-cart" class="confirmar" onclick="confirmarCompra()">Confirmar compra</button>
+                    <div class="buttons">
+                        <button class="confirmar" onclick="confirmarCompra()">Confirmar compra</button>
+                        <button class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
+                    </div>    
                 </div>   
                 <div class="js">
                     <!-- Resumen de la compra del viaje -->
-                    <div id="resumen"><!-- Filas generadas con JS --></div>
+                    <div id="resumen">
+                        <!-- Filas generadas con JS -->    
+                    </div>
                     <!-- Fin resumen de la compra  -->
                   
                     <!-- API pronostico del clima -->
