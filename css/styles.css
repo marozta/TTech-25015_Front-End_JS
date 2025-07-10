@@ -392,7 +392,7 @@ form {
       flex: 1;
     }
 
-        input[type="text"],
+    input[type="text"],
     input[type="email"],
     input[type="number"],
     input[type="tel"],
@@ -413,7 +413,7 @@ form {
       font-size: 12px;
     }
 
-
+    /*  SECCION CARRITO */
     .carrito-dinamico, .api, #resumen {
         margin-top: 4%;
         border: 1px solid var(--orange);
@@ -516,7 +516,43 @@ form {
       width: 100%;
     }
 
-/* FOOTER - BARRA NAVEGACION INFERIOR */
+  /* BARRA NAVEGACION INFERIOR */
+    .legales {
+   text-align: center;
+    }
+
+    .legales p {
+      font-size: 1.2rem;
+     
+    }
+
+    .designer {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    /* PAGINA DE CONTACTO */
+
+    .contact-page {
+      margin-top: 5%;
+      text-align: center;
+    }
+
+    .contact-page-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      }
+
+    .contact-page-image {
+      max-width: 300px;
+    }
+
+    .contact-page-form {
+      align-items: center;
+    }
+
+
 
 /* -------------------------------
    Media queries: Tablet (≥576px)
@@ -611,6 +647,14 @@ form {
   min-width: 700px; /* o lo que necesites para evitar que colapse demasiado */
 }
 
+      .form-row {
+        flex-direction: row;
+      }
+
+   
+
+
+
 }
 
 /* -------------------------------
@@ -686,6 +730,54 @@ form {
   grid-column: 3 / 4;
   grid-row: 3 / 4
 }
+
+.form-wrapper {
+  max-width: 800px;
+  padding: 50px;
+}
+
+  .form-header {
+  font-size: 22px;
+  padding: 20px;
+  }
+
+  input, select {
+  font-size: 16px;
+  }
+  
+
+  .legales {
+    text-align: center;
+    
+  }
+
+  .legales p {
+    font-size: 1.2rem;
+    
+  }
+
+  .designer {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+
+  .contact-page-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.contact-page-image {
+  max-width: 40%;
+}
+
+.contact-page-form {
+  max-width: 40%;
+  align-items: center;
+}
+
 }
 
 /* -------------------------------
@@ -699,61 +791,6 @@ form {
   main {
     max-width: 90%;
   }
+
+
 }
-
-/* ESTILOS DEL FORMULARIO */
-
-  
-    
-
-   
-
-
-
-    /* Responsive Design */
-
-    @media (min-width: 576px) {
-      .form-row {
-        flex-direction: row;
-      }
-
-      .form-wrapper {
-        padding: 40px;
-      }
-    }
-
-    @media (min-width: 992px) {
-      .form-wrapper {
-        max-width: 800px;
-        padding: 50px;
-      }
-
-      .form-header {
-        font-size: 22px;
-        padding: 20px;
-      }
-
-      input, select {
-        font-size: 16px;
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .form-wrapper {
-        max-width: 900px;
-      }
-
-      .form-header {
-        font-size: 24px;
-      }
-
-      .submit-button {
-        font-size: 18px;
-        padding: 15px;
-      }
-
-      .note {
-        font-size: 16px;
-      }
-    }
-/* FIN */

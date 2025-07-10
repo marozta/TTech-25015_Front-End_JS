@@ -265,7 +265,55 @@ async function confirmarCompra() {
 
   // llama a la funcion obtenerClima con destino y fechas para mostrar pronóstico del clima
   obtenerClima(destinos[destinoNombre].lat, destinos[destinoNombre].lon, fechaIda, fechaRegreso, destinoNombre);
+
+  // Prepara mensaje para Formspree
+  const mensajeFormspree = carrito.map(item => {
+    const adultos = item.pasajeros - item.menores;
+    return `
+🧭 Destino: ${item.destino}
+⭐ Nivel: ${item.nivelNombre}
+📅 Fecha ida: ${item.fechaIda}
+📅 Fecha vuelta: ${item.fechaVuelta}
+📆 Días: ${item.dias}
+👨‍👩‍👧 Pasajeros: ${item.pasajeros} (Adultos: ${adultos}, Menores: ${item.menores})
+💰 Precio total: $${item.precio.toLocaleString('es-AR', {minimumFractionDigits: 2})}
+    `;
+  }).join('\n-----------------------\n');
+
+  const formspreeUrl = "https://formspree.io/f/xdkgvwyk";
+
+  const datos = {
+    nombre,
+    email,
+    telefono: phone,
+    mensaje: mensajeFormspree
+  };
+
+  try {
+    const response = await fetch(formspreeUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(datos)
+    });
+
+    if (response.ok) {
+      alert("✅ Se ha enviado el resumen de tu compra por correo.");
+    } else {
+      alert("⚠️ No se pudo enviar el correo. Intenta nuevamente.");
+    }
+  } catch (error) {
+    console.error("Error al enviar a Formspree:", error);
+    alert("⚠️ Ocurrió un error al enviar el correo.");
+  }
 }
+
+
+
+
+
 
 // funcion que asigna iconos a los datos de la API del clima
 function codigoAIcono(codigo) {
