@@ -13,18 +13,18 @@ const preciosDestino = {
 
 // objeto con los niveles de los alojamientos
 const nombresNivel = {
-  1: 'Bronce',
-  2: 'Plata',
-  3: 'Oro',
-  4: 'Platino'
+  bronce: 'Bronce',
+  plata: 'Plata',
+  oro: 'Oro',
+  platino: 'Platino'
 };
 
 // objeto que indican el diferencial de precio de cada nivel de alojamiento
 const multiplicadorNivel = {
-  1: 1.0,
-  2: 1.5,
-  3: 2.5,
-  4: 4.0
+  bronce: 1.0,
+  plata: 1.5,
+  oro: 2.5,
+  platino: 4.0
 };
 
 // objeto que indica la latitud y la longitud de cada destino
@@ -66,7 +66,7 @@ document.getElementById('form-viaje').addEventListener('submit', function (e) {
   precioBase = parseFloat(precioBase);
 
   // toma el nivel, fecha inicial y final, cantidad de pasajeros totales y menores de las opciones del formulario "BOOK"
-  const nivel = document.getElementById('nivel').value;
+  const nivel = document.getElementById('nivel-hotel').value;
   const fechaIda = new Date(document.getElementById('fecha-ida').value);
   const fechaVuelta = new Date(document.getElementById('fecha-regreso').value);
   const pasajeros = parseInt(document.getElementById('pasajeros').value);
@@ -94,7 +94,6 @@ document.getElementById('form-viaje').addEventListener('submit', function (e) {
   // se construye un objeto "item" con todos los datos del carrito de compras
   const item = {
     destino: destinoNombre,
-    nivel: parseInt(nivel),
     nivelNombre: nombresNivel[nivel],
     fechaIda: fechaIda.toISOString().split('T')[0],
     fechaVuelta: fechaVuelta.toISOString().split('T')[0],
@@ -130,7 +129,7 @@ function mostrarCarrito() {
     const cantidadAdultos = item.pasajeros - item.menores;
     const dias = item.dias;
     const precioPorAdultoPorDia = (item.precio / (cantidadAdultos + item.menores * 0.5)) / dias;
-    const precioPorMenorPorDia = precioPorAdultoPorDia * 0.5;
+    const precioPorMenorPorDia = precioPorAdultoPorDia * 0.5; // los menores tienen un descuento del 50%
 
     const subtotalAdultos = cantidadAdultos * precioPorAdultoPorDia * dias;
     const subtotalMenores = item.menores * precioPorMenorPorDia * dias;
@@ -138,19 +137,23 @@ function mostrarCarrito() {
 
     // se crea la tabla que configura el carrito
     const filaAdultos = document.createElement('tr');
+    if (!hayMenores) {
+    filaAdultos.classList.add('solo-adultos');
+    }
+
     filaAdultos.innerHTML = `
       <td ${hayMenores ? 'rowspan="2"' : ''}>${item.destino}</td>
-      <td ${hayMenores ? 'rowspan="2"' : ''}>${nombresNivel[item.nivel]}</td>
+      <td ${hayMenores ? 'rowspan="2"' : ''}>${item.nivelNombre}</td>
       <td ${hayMenores ? 'rowspan="2"' : ''}>${dias}</td>
       <td>${cantidadAdultos} adulto(s)</td>
       <td>$${precioPorAdultoPorDia.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</td>
       <td>$${subtotalAdultos.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</td>
-      <td ${hayMenores ? 'rowspan="2"' : ''}>
+      <td class="accion-centro" ${hayMenores ? 'rowspan="2"' : ''}>
         <button class="eliminar" onclick="eliminarItem(${index})">Eliminar</button>
       </td>
     `;
 
-    // se agrega la tabla con el carrito al HTML
+    // se agrega la tabla del carrito la fila de pasajeros adultos
     tbody.appendChild(filaAdultos);
 
     // se verifica que haya menores para mostrarlos en una linea aparte en el carrito
@@ -178,6 +181,7 @@ function mostrarCarrito() {
 
 // funcion que permite eliminar un viaje del carrito
 function eliminarItem(index) {
+
   if (confirm("¿Seguro que quieres eliminar este ítem del carrito?")) {
     carrito.splice(index, 1);
     guardarCarrito();
@@ -204,6 +208,16 @@ function guardarCarrito() {
 
 // funcion que permite confirmar la compra mostrando en pantalla un resumen de la misma
 async function confirmarCompra() {
+  // Verifica que los campos nombre, email y telefono no estén vacíos y genera una alerta
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  
+  if (!nombre || !email || !phone) {
+    alert("Por favor, complete los campos: Nombre, Email y Teléfono antes de confirmar la compra.");
+    return; // Detiene la función si falta algún dato de identificacion
+  }
+
   // verifica que el carrito no este vacio
   if (carrito.length === 0) {
     alert("El carrito está vacío.");
@@ -225,7 +239,10 @@ async function confirmarCompra() {
 
     // string template con los datos a mostrar
     detalleViajes += `
-      <div style="margin-bottom: 1em;">
+      <div style="margin-bottom: 1em; color: green">
+        <strong>👤 Nombre:</strong> ${nombre}<br>
+        <strong>📧 Email:</strong> ${email}<br>
+        <strong>📞 Teléfono:</strong> ${phone}<br>
         <strong>🧭 Destino:</strong> ${item.destino}<br>
         <strong>⭐ Nivel:</strong> ${item.nivelNombre}<br>
         <strong>📅 Fecha ida:</strong> ${item.fechaIda}<br>
@@ -239,9 +256,8 @@ async function confirmarCompra() {
 
 // string template con los datos del resumen
   const resumenHtml = `
-    <h3>Resumen de la compra:</h3>
+    <h3 style="color: green; font-weight: bold">Resumen de la compra:</h3>
     ${detalleViajes}
-    
   `;
 
   // muestra el resumen de la compra en pantalla
@@ -382,7 +398,7 @@ async function obtenerClima(lat, lon, originalFechaIda, originalFechaRegreso, de
         </div>
       `;
     }
-    // se colocan la respuesta en el HTML para mostrar por pantalla
+    // se coloca la respuesta en el HTML para mostrar por pantalla
     html += `</div>`;
     container.innerHTML = html;
 

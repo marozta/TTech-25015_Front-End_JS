@@ -14,20 +14,19 @@
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
         <!-- FONT AWESOME -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <!--  GOOGLE FONT -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
             rel="stylesheet">
-
+        
         <!-- WEATHER ICONS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
         
         <!-- CSS -->        
         <link rel="stylesheet" href="./css/styles.css" > 
-        <link rel="stylesheet" href="./css/carrito_styles.css">       
 
         <!-- TITULO DE LA PAGINA -->
         <title>Talento Tech | Front-End JS</title>
@@ -79,14 +78,17 @@
                                     <li><a class="dropdown-item" href="./xtras/nosotros.html">Nosotros</a></li>
                                     <li><a class="dropdown-item" href="#servicios">Servicios</a></li>
                                     <li><a class="dropdown-item" href="#resenas">Reseñas</a></li>
-
-                                    
                                 </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="book"
                                     href=#booking><strong>BOOK</strong></a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id=""
+                                    href=#shop-cart><i class="fa-solid fa-cart-shopping"></i></a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -539,21 +541,41 @@
             </section>
             <!--  SECCION COMPRA VIAJES  -->
             <section class="booking" id="booking">
+
                 <h2 class="section-title">Book</h2>
-                <div class="form">
+
+                <div class="form" class="form-wrapper">
+
+                    <div class="form-header">
+                        <i class="fa-solid fa-calendar-check"></i> Realiza tu reserva
+                    </div>    
+                    
                     <form id="form-viaje" class="grid-container">
-                        <label for="" class="item1">
-                            <input type="text" name="nombre" id="nombre"
-                                    placeholder="Ingrese su Nombre">
-                        </label>
-                        <label class="item2">
-                            <input type="email" name="email" id="email"
-                                placeholder="Ingrese su email">    
-                        </label>
-                        <label for="destino" class="item3">
-                            Destino:
-                            <select id="destino" name="destino">
-                                <option value="">Elije tu destino:</option>
+
+                        <div class="form-group">
+                            <label for="name">Por favor ingresa tu nombre</label>
+                            <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="email"><i class="fa-solid fa-envelope"></i> Dirección de Email</label>
+                            <input type="email" name="email" id="email" placeholder="ejemplo@mail.com" required>
+                            <div class="error">Por favor ingresa una dirección de email válida.</div>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="phone"><i class="fa-solid fa-phone"></i> Número de Telefono o Móvil</label>
+                            <input type="tel" name="phone" id="phone" placeholder="Ej.: (+54-9-XX) XXXX-XXXX" required>
+                            <div class="error">Campo obligatorio</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="destino"><i class="fa-solid fa-map-marker-alt"></i> Destino</label>
+                            <select name="destino" id="destino" required>
+                                <option value="">-- Selecciona tu destino --</option>
                                 <option value="bariloche" data-precio="89900">Bariloche</option>
                                 <option value="calafate" data-precio="99900">El Calafate</option>
                                 <option value="cataratas" data-precio="99900">Cataratas del Iguazú</option>
@@ -561,45 +583,57 @@
                                 <option value="mardelplata" data-precio="49900">Mar del Plata</option>
                                 <option value="mendoza" data-precio="59900">Mendoza</option>
                                 <option value="madryn" data-precio="109900">Puerto Madryn</option>
-                                <option value="salta" data-precio="79900">Salta y Jujuy</option>
+                                <option value="salta" data-precio="79900">Salta & Jujuy</option>
                                 <option value="usuahia" data-precio="129900">Usuahia</option>
                             </select>
-                        </label>
-                        <label class="item4">
-                            Nivel de hotel:
-                            <select id="nivel">
-                                <option value="">Elije tu nivel:</option>
-                                <option value="1">Bronce</option>
-                                <option value="2">Plata</option>
-                                <option value="3">Oro</option>
-                                <option value="4">Platino</option>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="nivel-hotel"><i class="fa-solid fa-hotel"></i> Nivel paquete</label>
+                            <select name="nivel-hotel" id="nivel-hotel" required>
+                                <option value="">-- Selecciona un paquete --</option>
+                                <option value="bronce">Bronce</option>
+                                <option value="plata">Plata</option>
+                                <option value="oro">Oro</option>
+                                <option value="platino">Platino</option>
                             </select>
-                        </label>
-                        <label for="fecha-ida" class="item5">
-                            Fecha de ida:
-                            <input type="date" id="fecha-ida" required>
-                        </label>
-                        <label for="fecha-regreso"  class="item6">
-                            Fecha de regreso:
-                            <input type="date" id="fecha-regreso" required>
-                        </label>
-                        <label class="item7">
-                            Cantidad de total de pasajeros:
-                            <input type="number" id="pasajeros" min="1" value="1" required>
-                        </label>
-                        <label class="item8">
-                            ¿Cuantos menores de 14 años?
-                            <input type="number" id="menores" min="0" value="0">
-                        </label>
-                        <div class="item9">
-                            <button type="submit" class="btn-book">Agregar al carrito</button>
-                            <button type="reset" class="btn-book">Reestablecer</button>
-                        </div>   
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="adults"><i class="fa-solid fa-user"></i> Número total de pasajeros</label>
+                            <input type="number" name="pasajeros" id="pasajeros" min="1" placeholder="Por ejemplo: 2" required>
+                            <div class="error">Por favor ingrese un número válido.</div>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="children"><i class="fa-solid fa-child"></i> Número de menores de 14 años</label>
+                            <input type="number" name="menores" id="menores" min="0" value="0" placeholder="Number of children">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label for="fecha-ida"><i class="fa-solid fa-calendar-days"></i> Fecha de llegada</label>
+                            <input type="date" name="fecha-ida" id="fecha-ida" required>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="fecha-regreso"><i class="fa-solid fa-calendar-days"></i> Fecha de regreso</label>
+                            <input type="date" name="fecha-regreso" id="fecha-regreso" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-book">Agregar al carrito</button>
+                        <button type="reset" class="btn-book">Reestablecer</button>
                     </form>
+                
                 </div>
+                <div  id="shop-cart" class="carrito-dinamico">
                 <h2>Carrito de Compras</h2>
                 <div class="table-responsive">
-                    <table id="tabla-carrito" style="display: none; width: 100%; border-collapse: collapse;">
+                    <table id="tabla-carrito" style="display: none; width: 100%; border-collapse: collapse; text-align: center;">
                         <thead>
                             <tr>
                                 <th>Destino</th>
@@ -615,17 +649,19 @@
                             <!-- Filas generadas con JS -->
                         </tbody>
                     </table>
-                    <div id="total" style="font-weight: bold; margin-top: 10px;"></div>
+                    <div id="total" style="font-size: 2rem; font-weight: bold; margin-top: 10px;"></div>
                 </div>
                 <button class="btn-cart" class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
                 <button class="btn-cart" class="confirmar" onclick="confirmarCompra()">Confirmar compra</button>
+                </div>   
                 <div class="js">
                     <!-- Resumen de la compra del viaje -->
                     <div id="resumen"><!-- Filas generadas con JS --></div>
                     <!-- Fin resumen de la compra  -->
+                  
                     <!-- API pronostico del clima -->
                     <div class="api">
-                        <h1 id="titulo-clima">Pronostico del clima para el viaje</h1>
+                        <h2 id="titulo-clima">Pronóstico del clima para su viaje a ...</h2>
                         <div class="weather-container" id="clima"></div> 
                     </div> 
                 </div>            
