@@ -74,13 +74,13 @@ button {
 }
 
 .presentation-video .main-title {
-  font-size: 3.5rem;
+  font-size: 3.0rem !important;
   color: var(--orange);
   font-weight: 800;
 }
 
 .presentation-video .main-text {
-  font-size: 2rem;
+  font-size: 1.5rem !important;
 }
 
 .section-title {
